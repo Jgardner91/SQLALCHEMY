@@ -31,3 +31,13 @@ on rental.inventory_id == inventory.inventory_id
 join customer 
 on rental.customer_id == customer.customer_id
 where customer.first_name == 'CHARLOTTE';
+
+select rental.customer_id, first_name,last_name, count(rental_date) as 'NumRentals'
+from rental join customer on rental.customer_id==customer.customer_id
+group by rental.customer_id
+order by NumRentals desc;
+
+select rental.customer_id, film.title, film.film_id, film.description,film.rating,film.release_year, count(film.rating) as 'TypeFilm'
+from rental join inventory on rental.inventory_id==inventory.inventory_id
+join film on inventory.film_id==film.film_id
+where rental.customer_id == 148
